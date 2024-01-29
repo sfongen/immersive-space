@@ -58,10 +58,6 @@ public class DodgeBallGameController : MonoBehaviour
     public bool usePoofParticlesOnElimination;
     public List<GameObject> poofParticlesList;
 
-    [Header("LOSER PLATFORM")]
-    public List<GameObject> blueLosersList;
-    public List<GameObject> purpleLosersList;
-
     [Header("UI Audio")]
     public AudioClip FlagHitClip;
     public AudioClip BallImpactClip1;
@@ -144,25 +140,28 @@ public class DodgeBallGameController : MonoBehaviour
         //INITIALIZE AGENTS
         foreach (var item in Team0Players)
         {
-            item.Agent.Initialize();
-            item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
-            item.Agent.m_BehaviorParameters.TeamId = 0;
-            item.TeamID = 0;
-            item.Agent.NumberOfTimesPlayerCanBeHit = PlayerMaxHitPoints;
-            m_Team0AgentGroup.RegisterAgent(item.Agent);
+            if (item != null && item.Agent != null)
+            {
+                    item.Agent.Initialize();
+                    item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
+                    item.Agent.m_BehaviorParameters.TeamId = 0;
+                    item.TeamID = 0;
+                    item.Agent.NumberOfTimesPlayerCanBeHit = PlayerMaxHitPoints;
+                    m_Team0AgentGroup.RegisterAgent(item.Agent);
+            }
         }
         foreach (var item in Team1Players)
         {
-            item.Agent.Initialize();
-            item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
-            item.Agent.m_BehaviorParameters.TeamId = 1;
-            item.TeamID = 1;
-            item.Agent.NumberOfTimesPlayerCanBeHit = PlayerMaxHitPoints;
-            m_Team1AgentGroup.RegisterAgent(item.Agent);
+            if (item != null && item.Agent != null)
+            {
+                    item.Agent.Initialize();
+                    item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
+                    item.Agent.m_BehaviorParameters.TeamId = 1;
+                    item.TeamID = 1;
+                    item.Agent.NumberOfTimesPlayerCanBeHit = PlayerMaxHitPoints;
+                    m_Team1AgentGroup.RegisterAgent(item.Agent);
+            }
         }
-
-        SetActiveLosers(blueLosersList, 0);
-        SetActiveLosers(purpleLosersList, 0);
 
         //Poof Particles
         if (usePoofParticlesOnElimination)
@@ -242,29 +241,6 @@ public class DodgeBallGameController : MonoBehaviour
     }
 
 
-    //Display the correct number of agents on the loser podium
-    void SetActiveLosers(List<GameObject> list, int numOfLosers)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            list[i].SetActive(i < numOfLosers);
-        }
-    }
-
-    // Add one loser to the podium
-    void IncrementActiveLosers(List<GameObject> list)
-    {
-        // Count how many active losers there are
-        int numLosers = 0;
-        foreach (var loser in list)
-        {
-            if (loser.gameObject.activeInHierarchy)
-            {
-                numLosers++;
-            }
-        }
-        SetActiveLosers(list, Math.Min(numLosers + 1, 3));
-    }
 
     // Drop flag if agent is holding enemy flag.
     private void dropFlagIfHas(DodgeBallAgent hit, DodgeBallAgent thrower)
@@ -426,16 +402,6 @@ public class DodgeBallGameController : MonoBehaviour
             if (usePoofParticlesOnElimination)
             {
                 PlayParticleAtPosition(agent.transform.position);
-            }
-
-            //ADD TO LOSER PODIUM 
-            if (agent.teamID == 0)
-            {
-                IncrementActiveLosers(blueLosersList);
-            }
-            else
-            {
-                IncrementActiveLosers(purpleLosersList);
             }
         }
     }
@@ -642,21 +608,38 @@ public class DodgeBallGameController : MonoBehaviour
             }
         }
 
-        //Reset the agents
+        // Reset the agents for Team 0
         foreach (var item in Team0Players)
         {
-            item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
-            item.Agent.gameObject.SetActive(true);
-            item.Agent.ResetAgent();
-            m_Team0AgentGroup.RegisterAgent(item.Agent);
+            if (item != null && item.Agent != null)
+            {
+                item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
+                item.Agent.gameObject.SetActive(true);
+                item.Agent.ResetAgent();
+                m_Team0AgentGroup.RegisterAgent(item.Agent);
+            }
+            else
+            {
+                Debug.LogWarning("A Team0Player or its Agent is null during reset.");
+            }
         }
+
+        // Reset the agents for Team 1
         foreach (var item in Team1Players)
         {
-            item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
-            item.Agent.gameObject.SetActive(true);
-            item.Agent.ResetAgent();
-            m_Team1AgentGroup.RegisterAgent(item.Agent);
+            if (item != null && item.Agent != null)
+            {
+                item.Agent.HitPointsRemaining = PlayerMaxHitPoints;
+                item.Agent.gameObject.SetActive(true);
+                item.Agent.ResetAgent();
+                m_Team1AgentGroup.RegisterAgent(item.Agent);
+            }
+            else
+            {
+                Debug.LogWarning("A Team1Player or its Agent is null during reset.");
+            }
         }
+
 
         if (GameMode == GameModeType.CaptureTheFlag)
         {
@@ -669,8 +652,6 @@ public class DodgeBallGameController : MonoBehaviour
             Team1Flag.gameObject.SetActive(false);
         }
 
-        SetActiveLosers(blueLosersList, 0);
-        SetActiveLosers(purpleLosersList, 0);
     }
 
     // Update is called once per frame

@@ -274,36 +274,11 @@ public class DodgeBallAgent : Agent
             opponentsList = m_GameController.Team0Players;
         }
 
-        foreach (var info in teamList)
-        {
-            if (info.Agent != this && info.Agent.gameObject.activeInHierarchy)
-            {
-                m_OtherAgentsBuffer.AppendObservation(GetOtherAgentData(info));
-            }
-            if (info.Agent.HasEnemyFlag) // If anyone on my team has the enemy flag
-            {
-                AddReward(m_TeamHasFlagBonus);
-            }
-        }
         //Only opponents who picked up the flag are visible
         var currentFlagPosition = TeamFlag.transform.position;
         int numEnemiesRemaining = 0;
         bool enemyHasFlag = false;
-        foreach (var info in opponentsList)
-        {
-            if (info.Agent.gameObject.activeInHierarchy)
-            {
-                numEnemiesRemaining++;
-            }
-            if (info.Agent.HasEnemyFlag)
-            {
-                enemyHasFlag = true;
-                currentFlagPosition = info.Agent.transform.position;
-                AddReward(m_OpponentHasFlagPenalty); // If anyone on the opposing team has a flag
-            }
-        }
-        var portionOfEnemiesRemaining = (float)numEnemiesRemaining / (float)opponentsList.Count;
-
+        
         //Different observation for different mode. Enemy Has Flag is only relevant to CTF
         if (m_GameController.GameMode == DodgeBallGameController.GameModeType.CaptureTheFlag)
         {
