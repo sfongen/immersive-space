@@ -82,6 +82,8 @@ public class ThrowBall : MonoBehaviour
 
         m_AudioSource = GetComponent<AudioSource>();
 
+        PlaySound = true;
+
         initialized = true;
     }
 
@@ -95,6 +97,7 @@ public class ThrowBall : MonoBehaviour
     //ignoreTeam. 0 ignores team 0, 1 ignores team 1, -1 ignores no teams
     public void Throw(DodgeBall db, DodgeBallAgent thrower, int ignoreTeam = -1)
     {
+
         if (coolDownWait || !gameObject.activeSelf)
         {
             return;
@@ -104,6 +107,7 @@ public class ThrowBall : MonoBehaviour
         db.BallIsInPlay(true, ignoreTeam);
         db.thrownBy = thrower;
         FireProjectile(db.rb);
+
     }
 
     public void Drop(DodgeBall db)
@@ -116,6 +120,7 @@ public class ThrowBall : MonoBehaviour
 
     public void FireProjectile(Rigidbody rb)
     {
+
         rb.transform.position = projectileOrigin.position;
         rb.transform.rotation = projectileOrigin.rotation;
 
@@ -135,8 +140,11 @@ public class ThrowBall : MonoBehaviour
 
         if (PlaySound)
         {
+            Debug.Log("Throwing ball and playing sound");
+
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
         }
+
     }
 
     IEnumerator I_ShakeTransform()
