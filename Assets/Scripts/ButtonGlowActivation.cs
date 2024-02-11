@@ -25,13 +25,13 @@ public class ButtonGlowActivation : MonoBehaviour
     }
     public void ToggleGlow(bool activate)
     {
-        isActivated = activate; // Update the activation state
-        HitByParticles.Play(); // Play hit particles only when activated
+        isActivated = activate;
 
         if (activate)
         {
             buttonMaterial.EnableKeyword("_EMISSION");
             buttonMaterial.SetColor("_EmissionColor", glowColor * glowIntensity); // Set the glow color
+            HitByParticles.Play(); // Play hit particles only when activated
         }
         else
         {
@@ -47,6 +47,17 @@ public class ButtonGlowActivation : MonoBehaviour
     }
 
 
+    public enum ButtonColor
+    {
+        Red,
+        Orange,
+        Yellow,
+        Green,
+        Indigo,
+        Violet
+    }
+
+    public ButtonColor buttonColor; // Add this property to hold the button's color
 
     public bool IsActivated()
     {

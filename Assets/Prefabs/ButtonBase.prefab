@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8322383851546185658}
   - component: {fileID: 2987979792001445649}
   m_Layer: 0
-  m_Name: ButtonBlue
+  m_Name: ButtonIndigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   glowColor: {r: 0, g: 0, b: 1, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 7588075381482405103}
+  buttonColor: 4
 --- !u!1 &1420739858288860677
 GameObject:
   m_ObjectHideFlags: 0
@@ -9938,7 +9939,7 @@ GameObject:
   - component: {fileID: 4102182245285431234}
   - component: {fileID: 4522883124209008155}
   m_Layer: 0
-  m_Name: ButtonPurple
+  m_Name: ButtonViolet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10046,6 +10047,7 @@ MonoBehaviour:
   glowColor: {r: 0.54509807, g: 0, b: 1, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 248296335961536834}
+  buttonColor: 5
 --- !u!1 &4734144458355580123
 GameObject:
   m_ObjectHideFlags: 0
@@ -15069,6 +15071,7 @@ MonoBehaviour:
   glowColor: {r: 0.81960785, g: 0.13605672, b: 0, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 8901213307514008526}
+  buttonColor: 1
 --- !u!1 &5110705531811580098
 GameObject:
   m_ObjectHideFlags: 0
@@ -25104,6 +25107,7 @@ MonoBehaviour:
   glowColor: {r: 1, g: 0, b: 0, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 8052488245018017646}
+  buttonColor: 0
 --- !u!1 &7161727213117372558
 GameObject:
   m_ObjectHideFlags: 0
@@ -25226,6 +25230,7 @@ MonoBehaviour:
   glowColor: {r: 1, g: 1, b: 0, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 5267441382294132566}
+  buttonColor: 2
 --- !u!1 &8498733496849824598
 GameObject:
   m_ObjectHideFlags: 0
@@ -30249,3 +30254,4 @@ MonoBehaviour:
   glowColor: {r: 0, g: 1, b: 0, a: 1}
   glowIntensity: 1.5
   HitByParticles: {fileID: 5212761113164817805}
+  buttonColor: 3
