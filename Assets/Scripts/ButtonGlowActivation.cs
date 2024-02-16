@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ButtonGlowActivation : MonoBehaviour
@@ -69,4 +70,34 @@ public class ButtonGlowActivation : MonoBehaviour
     {
         ToggleGlow(false);
     }
+
+    public IEnumerator BlinkAndReset()
+    {
+        int blinkCycles = 2; // Total number of on-off blink cycles
+        float blinkDuration = 0.5f; // Duration for each on or off state within a blink cycle
+
+        Material mat = GetComponent<Renderer>().material;
+        Color originalColor = mat.GetColor("_EmissionColor");
+
+        // Iterate through the blink cycles
+        for (int i = 0; i < blinkCycles; i++)
+        {
+            // Turn the button "off" (set emission color to black)
+            mat.SetColor("_EmissionColor", Color.black);
+            yield return new WaitForSeconds(blinkDuration);
+
+            // Turn the button "on" (restore original emission color)
+            mat.SetColor("_EmissionColor", originalColor);
+            yield return new WaitForSeconds(blinkDuration);
+        }
+
+        // After completing the blink cycles, turn the button "off" before resetting
+        mat.SetColor("_EmissionColor", Color.black);
+        yield return new WaitForSeconds(blinkDuration);
+
+        // Reset the button after the final "off" state
+        ResetButton();
+    }
+
+
 }

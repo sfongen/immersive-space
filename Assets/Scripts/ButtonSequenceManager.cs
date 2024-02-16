@@ -66,7 +66,7 @@ public class ButtonSequenceManager : MonoBehaviour
             if (IsSequenceActivated(sequence))
             {
                 Debug.Log("A sequence is activated");
-                TriggerEvent("Sequence activated");
+                TriggerEvent(sequence);
                 break; // Stop checking other sequences once one is found to be activated
             }
         }
@@ -91,13 +91,17 @@ public class ButtonSequenceManager : MonoBehaviour
         return true; // All checks passed, the sequence is activated
     }
 
-    void TriggerEvent(string combination)
-    {
-        Debug.Log($"Combination {combination} activated");
-        // Implement the logic for what happens when a combination is activated
+    void TriggerEvent(List<ButtonGlowActivation> activatedSequence)
+        {
+            Debug.Log("Correct sequence activated. Starting blink animation.");
 
-        ResetSequence(); // Reset the sequence to prepare for a new sequence
-    }
+            // Start the blink animation for each button in the sequence
+            foreach (var button in activatedSequence)
+            {
+                Debug.Log("Blink coroutine started");
+                StartCoroutine(button.BlinkAndReset());
+            }
+        }
 
     public void ResetSequence()
     {
