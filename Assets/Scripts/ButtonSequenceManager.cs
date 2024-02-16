@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonSequenceManager : MonoBehaviour
 {
+    private List<List<ButtonGlowActivation>> sequences = new List<List<ButtonGlowActivation>>();
     private ButtonGlowActivation[] buttons; // To hold references to all button scripts
 
     // Specific buttons
@@ -14,27 +16,42 @@ public class ButtonSequenceManager : MonoBehaviour
 
     void Start()
     {
-        foreach (Transform child in transform)
+        buttons = GetComponentsInChildren<ButtonGlowActivation>();
+
+        foreach (var button in buttons)
         {
-            Debug.Log("Found child: " + child.name); // Log each child's name
+            Debug.Log("Found child: " + button.gameObject.name); // Log each child's name
 
-            if (child.name == "ButtonRed")
-                redButton = child.GetComponent<ButtonGlowActivation>();
-            else if (child.name == "ButtonOrange")
-                orangeButton = child.GetComponent<ButtonGlowActivation>();
-            else if (child.name == "ButtonYellow")
-                yellowButton = child.GetComponent<ButtonGlowActivation>();
-            else if (child.name == "ButtonGreen")
-                greenButton = child.GetComponent<ButtonGlowActivation>();
-            else if (child.name == "ButtonIndigo")
-                indigoButton = child.GetComponent<ButtonGlowActivation>();
-            else if (child.name == "ButtonViolet")
-                violetButton = child.GetComponent<ButtonGlowActivation>();
-
-            // Check if the component was found and assigned
-            if (child.GetComponent<ButtonGlowActivation>() == null)
-                Debug.LogError("ButtonGlowActivation component not found on " + child.name);
+            switch (button.gameObject.name)
+            {
+                case "ButtonRed":
+                    redButton = button;
+                    break;
+                case "ButtonOrange":
+                    orangeButton = button;
+                    break;
+                case "ButtonYellow":
+                    yellowButton = button;
+                    break;
+                case "ButtonGreen":
+                    greenButton = button;
+                    break;
+                case "ButtonIndigo":
+                    indigoButton = button;
+                    break;
+                case "ButtonViolet":
+                    violetButton = button;
+                    break;
+                default:
+                    Debug.LogError("Unexpected button name: " + button.gameObject.name);
+                    break;
+            }
         }
+
+        // Define sequences
+        sequences.Add(new List<ButtonGlowActivation> { redButton, greenButton, indigoButton }); // Sequence 1
+        sequences.Add(new List<ButtonGlowActivation> { orangeButton, violetButton, greenButton }); // Sequence 2
+        sequences.Add(new List<ButtonGlowActivation> { yellowButton, indigoButton, redButton }); // Sequence 3
     }
 
     void Update()
@@ -44,38 +61,50 @@ public class ButtonSequenceManager : MonoBehaviour
 
     void CheckButtonCombinations()
     {
-        // Check if red, green, and indigo buttons are activated
-        if (redButton != null && greenButton != null && indigoButton != null &&
-            redButton.IsActivated() && greenButton.IsActivated() && indigoButton.IsActivated())
+        foreach (var sequence in sequences)
         {
-            Debug.Log("Red, Green, and Indigo buttons activated");
-            // Trigger event or action
-            TriggerEvent("Red-Green-Indigo activated");
+            if (IsSequenceActivated(sequence))
+            {
+                Debug.Log("A sequence is activated");
+                TriggerEvent("Sequence activated");
+                break; // Stop checking other sequences once one is found to be activated
+            }
         }
+    }
+
+    bool IsSequenceActivated(List<ButtonGlowActivation> sequence)
+    {
+        // Check if all buttons in the sequence are activated
+        foreach (var button in sequence)
+        {
+            if (button == null || !button.IsActivated())
+                return false; // If any button in the sequence is not activated or null, the sequence is not activated
+        }
+
+        // Check that no other buttons are activated
+        foreach (var button in buttons)
+        {
+            if (!sequence.Contains(button) && button.IsActivated())
+                return false; // If any button outside the sequence is activated, the sequence is not activated
+        }
+
+        return true; // All checks passed, the sequence is activated
     }
 
     void TriggerEvent(string combination)
     {
         Debug.Log($"Combination {combination} activated");
-
         // Implement the logic for what happens when a combination is activated
-        // This could involve activating other GameObjects, playing sounds, etc.
 
-        //TODO: Add animation here to indicate correct sequences
-        ResetSequence(); //Reset the sequence to prepare for new sequence
+        ResetSequence(); // Reset the sequence to prepare for a new sequence
     }
 
-     public void ResetSequence()
+    public void ResetSequence()
     {
         // Reset each button
-        if (redButton != null) redButton.ResetButton();
-        if (orangeButton != null) orangeButton.ResetButton();
-        if (yellowButton != null) yellowButton.ResetButton();
-        if (greenButton != null) greenButton.ResetButton();
-        if (indigoButton != null) indigoButton.ResetButton();
-        if (violetButton != null) violetButton.ResetButton();
-
-        // Allow the sequence to be triggered again
-        // You might want to reset any other relevant state or variables here
+        foreach (var button in buttons)
+        {
+            if (button != null) button.ResetButton();
+        }
     }
 }
