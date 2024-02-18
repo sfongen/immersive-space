@@ -41,6 +41,7 @@ TagManager:
   - purpleBase
   - blueBase
   - menuController
+  - HedgeCircle
   layers:
   - Default
   - TransparentFX
