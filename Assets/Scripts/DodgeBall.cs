@@ -86,7 +86,7 @@ public class DodgeBall : MonoBehaviour
     {
         //IF NOT MY TEAM
         //PLAYER GOES TO TIMEOUT
-        if (col.gameObject.CompareTag("ground"))
+        if (col.gameObject.CompareTag("ground") || col.gameObject.CompareTag("HedgeCircle"))
         {
             BallIsInPlay(false);
             thrownBy = null;

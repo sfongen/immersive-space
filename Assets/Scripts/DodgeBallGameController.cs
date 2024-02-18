@@ -117,7 +117,7 @@ public class DodgeBallGameController : MonoBehaviour
     private StatsRecorder m_StatsRecorder;
     private int m_NumFlagDrops = 0;
 
-    public int MaxEnvironmentSteps = 5000;
+    public int MaxEnvironmentSteps = 5000000;
 
     void Start()
     {
@@ -198,14 +198,7 @@ public class DodgeBallGameController : MonoBehaviour
     {
         if (!m_Initialized) return;
         
-        //RESET SCENE IF WE MaxEnvironmentSteps
-        m_ResetTimer += 1;
-        if (m_ResetTimer >= MaxEnvironmentSteps)
-        {
-            m_Team0AgentGroup.GroupEpisodeInterrupted();
-            m_Team1AgentGroup.GroupEpisodeInterrupted();
-            ResetScene();
-        }
+        
     }
 
     //Show a countdown UI when the round starts
