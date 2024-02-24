@@ -367,8 +367,8 @@ public class DodgeBallAgent : Agent
         {
             var db = ActiveBallsQueue.Peek();
             ThrowController.Throw(db, this, m_BehaviorParameters.TeamId);
-            ActiveBallsQueue.Dequeue();
-            currentNumberOfBalls--;
+            //ActiveBallsQueue.Dequeue();
+            //currentNumberOfBalls--;
             SetActiveBalls(currentNumberOfBalls);
         }
     }
