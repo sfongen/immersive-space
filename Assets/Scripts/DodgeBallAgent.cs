@@ -572,10 +572,7 @@ public class DodgeBallAgent : Agent
         }
         else //TRY TO PICK IT UP
         {
-            if (currentNumberOfBalls < 4)
-            {
                 PickUpBall(db);
-            }
         }
     }
 
