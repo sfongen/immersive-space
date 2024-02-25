@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: decb6ff671f423c4bb6bf23079ce6c08
+=======
+guid: ec5d02fe6128649d5b25b4796f664027
+>>>>>>> Seb-features
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
