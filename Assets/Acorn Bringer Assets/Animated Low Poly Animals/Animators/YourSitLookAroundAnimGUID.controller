@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!91 &9100000
+AnimatorController:
+  # Existing AnimatorController properties...
+  m_AnimatorLayers:
+  - serializedVersion: 5
+    m_Name: Base Layer
+    m_StateMachine: {fileID: 1107453408626096200}
+    # Other layer properties...
+
+--- !u!1102 &1102207709660934453  # New AnimatorState ID
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  # Other common properties...
+  m_Name: Bird_SitLookAround_Anim
+  m_Speed: 1
+  # Other state properties...
+  m_Motion: {fileID: 7400010, guid: YourSitLookAroundAnimGUID, type: 3}  # Replace with your animation clip's GUID
+
+--- !u!1107 &1107453408626096200
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  # Other StateMachine properties...
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: 1102207709660934452}  # Existing flight state
+    m_Position: {x: 336, y: 24, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102207709660934453}  # New sit and look around state
+    m_Position: {x: 336, y: 224, z: 0}  # Adjust position as needed
+  # Add transitions as necessary...
+
