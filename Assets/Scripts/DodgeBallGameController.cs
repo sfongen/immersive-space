@@ -42,7 +42,7 @@ public class DodgeBallGameController : MonoBehaviour
     [Header("BALLS")] public GameObject BallPrefab;
     public float BallSpawnRadius = 3;
     public List<Transform> BallSpawnPositions;
-    public int NumberOfBallsToSpawn = 10;
+    public int NumberOfBallsToSpawn = 1;
     public int PlayerMaxHitPoints = 5;
 
     [Header("CTF SETTINGS")]

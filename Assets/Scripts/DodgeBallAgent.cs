@@ -247,7 +247,7 @@ public class DodgeBallAgent : Agent
             sensor.AddObservation(ThrowController.coolDownWait); //Held DBs Normalized
             sensor.AddObservation(Stunned);
             Array.Clear(ballOneHot, 0, 5);
-            ballOneHot[currentNumberOfBalls] = 1f;
+            //ballOneHot[currentNumberOfBalls] = 1f;
             sensor.AddObservation(ballOneHot); //Held DBs Normalized
             sensor.AddObservation((float)HitPointsRemaining / (float)NumberOfTimesPlayerCanBeHit); //Remaining Hit Points Normalized
 
