@@ -4,9 +4,13 @@ using UnityEngine;
 public class ButtonSequenceManager : MonoBehaviour
 {
     private List<List<ButtonGlowActivation>> sequences = new List<List<ButtonGlowActivation>>();
-    private ButtonGlowActivation[] buttons;
+    private ButtonGlowActivation[] buttons; // Array of all button components
     public AudioSource[] speakers;
     public ParticleSystem[] musicNoteParticleSystems;
+
+    // Define materials in the class
+    public Material lightGreenMaterial; // Assign through Unity Editor
+    public Material darkMaterial; // Assign through Unity Editor
 
     // Specific buttons
     private ButtonGlowActivation redButton, orangeButton, yellowButton, greenButton, indigoButton, violetButton;
@@ -78,16 +82,6 @@ public class ButtonSequenceManager : MonoBehaviour
         }
     }
 
-    private void ActivateGreenLightSequence()
-    {
-        if (buttons.Length > 0)
-        {
-            // Assuming the first button can be used to call the coroutine
-            StartCoroutine(ButtonGlowActivation.BriefGreenLightAndResetAll(new List<ButtonGlowActivation>(buttons)));
-
-        }
-    }
-
     private bool IsSequenceActivated(List<ButtonGlowActivation> sequence)
     {
         foreach (var button in sequence)
@@ -115,8 +109,8 @@ public class ButtonSequenceManager : MonoBehaviour
             if (musicNotes != null) musicNotes.Play();
         }
 
-        // Activate green light sequence and reset all buttons
-        StartCoroutine(ButtonGlowActivation.BriefGreenLightAndResetAll(new List<ButtonGlowActivation>(buttons)));
+        // Use the buttons array directly
+        StartCoroutine(ButtonGlowActivation.BriefGreenLightAndResetAll(new List<ButtonGlowActivation>(buttons), lightGreenMaterial, darkMaterial));
     }
 
     public void ResetSequence()

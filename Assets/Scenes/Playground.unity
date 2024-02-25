@@ -18104,6 +18104,8 @@ MonoBehaviour:
   - {fileID: 1021538880}
   - {fileID: 907487077}
   - {fileID: 1645745562}
+  lightGreenMaterial: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
+  darkMaterial: {fileID: 2100000, guid: a6eac50abe334b746a14102a66b70ad9, type: 2}
 --- !u!4 &1962047170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9060b06670827441fbe3836cfa75fb22,
@@ -20629,6 +20631,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 8baff3a79c757c04896c0c2a040278af, type: 2}
+    - target: {fileID: 1545568211342887052, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 154721182}
+    - target: {fileID: 1545568211342887052, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     - target: {fileID: 2140454799387531558, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
         type: 3}
       propertyPath: buttonColor
@@ -20644,6 +20656,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: a42f6737871815e42a6a4c4bea868ed7, type: 2}
+    - target: {fileID: 2140454799387531558, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 1661884739}
+    - target: {fileID: 2140454799387531558, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     - target: {fileID: 2987979792001445649, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
         type: 3}
       propertyPath: buttonColor
@@ -20659,6 +20681,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 81e021958a70326499d0d45bfc3ee311, type: 2}
+    - target: {fileID: 2987979792001445649, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 920060048}
+    - target: {fileID: 2987979792001445649, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     - target: {fileID: 4169940113071502510, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
         type: 3}
       propertyPath: m_Name
@@ -20679,6 +20711,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: c8c5d57e96032a94293600f9e76534b2, type: 2}
+    - target: {fileID: 4251885542290214234, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 132487282}
+    - target: {fileID: 4251885542290214234, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     - target: {fileID: 4522883124209008155, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
         type: 3}
       propertyPath: buttonColor
@@ -20694,6 +20736,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 8f207e9f0f62a9a40882045bf3486763, type: 2}
+    - target: {fileID: 4522883124209008155, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 1050366610}
+    - target: {fileID: 4522883124209008155, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     - target: {fileID: 5845921376800062254, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
         type: 3}
       propertyPath: m_Name
@@ -20764,6 +20816,16 @@ PrefabInstance:
       propertyPath: glowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 488097d8dfda45442ba3025bca2fe734, type: 2}
+    - target: {fileID: 7913321673896982585, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: associatedCapsule
+      value: 
+      objectReference: {fileID: 1837406349}
+    - target: {fileID: 7913321673896982585, guid: d16ea7fb2b28a2343b2a076d1192ebaf,
+        type: 3}
+      propertyPath: lightGreenMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 38288ba83e5d3de4a9835047cd53fbb5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

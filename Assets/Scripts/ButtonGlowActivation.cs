@@ -4,45 +4,35 @@ using UnityEngine;
 
 public class ButtonGlowActivation : MonoBehaviour
 {
-    // public Material buttonMaterial; // You might not need this unless it's used elsewhere
     public Material glowMaterial; // Material to use when the capsule glows
     public Material darkMaterial; // Material to revert the capsule to when it's not glowing
+    public Material lightGreenMaterial; // Material to use for the brief green light effect
     private bool isActivated = false; // Activation state of the button
     public ParticleSystem HitByParticles;
 
-    void Start()
-    {
-    }
+    public GameObject associatedCapsule; // Direct reference to the associated capsule GameObject
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "dodgeBallActive")
+        if (collision.gameObject.tag == "dodgeBallActive" && associatedCapsule != null)
         {
-            ToggleGlow(!isActivated); // Toggle the activation state
+            HitByParticles.Play(); // Play particle effect on hit
+            ToggleActivation(); // Toggle the activation state of the button
         }
     }
 
-    public void ToggleGlow(bool activate)
+    void ToggleActivation()
     {
-        isActivated = activate;
-        Transform capsule = transform.Find("Capsule"); // Ensure your capsules are named "Capsule"
+        isActivated = !isActivated; // Toggle the activation state
+        ToggleCapsuleGlow(associatedCapsule, isActivated); // Change the capsule's material based on the new state
+    }
 
-        if (capsule != null)
+    public void ToggleCapsuleGlow(GameObject capsule, bool activate)
+    {
+        Renderer renderer = capsule.GetComponent<Renderer>();
+        if (renderer != null)
         {
-            Renderer capsuleRenderer = capsule.GetComponent<Renderer>();
-            if (activate)
-            {
-                capsuleRenderer.material = glowMaterial; // Use the glow material
-            }
-            else
-            {
-                capsuleRenderer.material = darkMaterial; // Revert to the dark material
-            }
-        }
-
-        if (activate && HitByParticles != null)
-        {
-            HitByParticles.Play(); // Play hit particles only when activated
+            renderer.material = activate ? glowMaterial : darkMaterial;
         }
     }
 
@@ -53,32 +43,28 @@ public class ButtonGlowActivation : MonoBehaviour
 
     public void ResetButton()
     {
-        ToggleGlow(false);
+        isActivated = false; // Reset the activation state
+        ToggleCapsuleGlow(associatedCapsule, false); // Reset the capsule to dark material
     }
 
-    public static IEnumerator BriefGreenLightAndResetAll(List<ButtonGlowActivation> allButtons)
+    public static IEnumerator BriefGreenLightAndResetAll(List<ButtonGlowActivation> allButtons, Material lightGreenMaterial, Material darkMaterial)
     {
-        Color lightGreen = new Color(0.5f, 1f, 0.5f); // Define light green color
-        float duration = 0.5f; // Duration for light green state
-
-        // Set all capsules to light green
+        // Apply light green material to all capsules
         foreach (var button in allButtons)
         {
-            Transform capsule = button.transform.Find("Capsule");
-            if (capsule != null)
+            if (button.associatedCapsule != null)
             {
-                Renderer capsuleRenderer = capsule.GetComponent<Renderer>();
-                capsuleRenderer.material.EnableKeyword("_EMISSION");
-                capsuleRenderer.material.SetColor("_EmissionColor", lightGreen);
+                Renderer capsuleRenderer = button.associatedCapsule.GetComponent<Renderer>();
+                capsuleRenderer.material = lightGreenMaterial; // Use the light green material
             }
         }
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(0.5f); // Wait for half a second
 
-        // Reset all capsules to dark
+        // Reset all buttons and capsules to their default states
         foreach (var button in allButtons)
         {
-            button.ResetButton(); // This will now reset the capsule's color to dark
+            button.ResetButton(); // This will reset the activation state and apply the dark material
         }
     }
 }
