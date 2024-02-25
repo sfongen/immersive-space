@@ -25,7 +25,6 @@ public class ButtonSequenceManager : MonoBehaviour
             case "ButtonGreen": greenButton = button; break;
             case "ButtonIndigo": indigoButton = button; break;
             case "ButtonViolet": violetButton = button; break;
-            // Add case for "ButtonBlue": blueButton = button; break; if you have a blue button
             default: Debug.LogError("Unexpected button name: " + button.gameObject.name); break;
         }
     }
@@ -79,6 +78,16 @@ public class ButtonSequenceManager : MonoBehaviour
         }
     }
 
+    private void ActivateGreenLightSequence()
+    {
+        if (buttons.Length > 0)
+        {
+            // Assuming the first button can be used to call the coroutine
+            StartCoroutine(ButtonGlowActivation.BriefGreenLightAndResetAll(new List<ButtonGlowActivation>(buttons)));
+
+        }
+    }
+
     private bool IsSequenceActivated(List<ButtonGlowActivation> sequence)
     {
         foreach (var button in sequence)
@@ -106,11 +115,8 @@ public class ButtonSequenceManager : MonoBehaviour
             if (musicNotes != null) musicNotes.Play();
         }
 
-        // Start the blink animation for each button in the activated sequence
-        foreach (var button in sequences[sequenceIndex])
-        {
-            StartCoroutine(button.BlinkAndReset());
-        }
+        // Activate green light sequence and reset all buttons
+        StartCoroutine(ButtonGlowActivation.BriefGreenLightAndResetAll(new List<ButtonGlowActivation>(buttons)));
     }
 
     public void ResetSequence()
