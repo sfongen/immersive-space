@@ -16,33 +16,33 @@ public class ButtonSequenceManager : MonoBehaviour
     private ButtonGlowActivation redButton, orangeButton, yellowButton, greenButton, indigoButton, violetButton;
 
     void Start()
-{
-    buttons = GetComponentsInChildren<ButtonGlowActivation>();
-
-    foreach (var button in buttons)
-    {
-        switch (button.gameObject.name)
         {
-            case "ButtonRed": redButton = button; break;
-            case "ButtonOrange": orangeButton = button; break;
-            case "ButtonYellow": yellowButton = button; break;
-            case "ButtonGreen": greenButton = button; break;
-            case "ButtonIndigo": indigoButton = button; break;
-            case "ButtonViolet": violetButton = button; break;
-            default: Debug.LogError("Unexpected button name: " + button.gameObject.name); break;
+            buttons = GetComponentsInChildren<ButtonGlowActivation>();
+
+            foreach (var button in buttons)
+            {
+                switch (button.gameObject.name)
+                {
+                    case "ButtonRed": redButton = button; break;
+                    case "ButtonOrange": orangeButton = button; break;
+                    case "ButtonYellow": yellowButton = button; break;
+                    case "ButtonGreen": greenButton = button; break;
+                    case "ButtonIndigo": indigoButton = button; break;
+                    case "ButtonViolet": violetButton = button; break;
+                    default: Debug.LogError("Unexpected button name: " + button.gameObject.name); break;
+                }
+            }
+
+            // Define sequences with 3 unique colors each
+            sequences.Add(new List<ButtonGlowActivation> { redButton, greenButton, indigoButton }); 
+            sequences.Add(new List<ButtonGlowActivation> { orangeButton, indigoButton, yellowButton });
+            sequences.Add(new List<ButtonGlowActivation> { yellowButton, violetButton, redButton });
+            sequences.Add(new List<ButtonGlowActivation> { greenButton, orangeButton, violetButton });
+            sequences.Add(new List<ButtonGlowActivation> { indigoButton, redButton, yellowButton });
+            sequences.Add(new List<ButtonGlowActivation> { violetButton, greenButton, indigoButton });
+
+            InitializeAudioAndParticles();
         }
-    }
-
-    // Define sequences with 3 unique colors each
-    sequences.Add(new List<ButtonGlowActivation> { redButton, greenButton, indigoButton }); // Adjust if blueButton is not defined
-    sequences.Add(new List<ButtonGlowActivation> { orangeButton, indigoButton, yellowButton });
-    sequences.Add(new List<ButtonGlowActivation> { yellowButton, violetButton, redButton });
-    sequences.Add(new List<ButtonGlowActivation> { greenButton, orangeButton, violetButton });
-    sequences.Add(new List<ButtonGlowActivation> { indigoButton, redButton, yellowButton });
-    sequences.Add(new List<ButtonGlowActivation> { violetButton, greenButton, indigoButton });
-
-    InitializeAudioAndParticles();
-}
 
     void Update()
     {

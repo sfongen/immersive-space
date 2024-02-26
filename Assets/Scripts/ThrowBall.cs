@@ -140,7 +140,6 @@ public class ThrowBall : MonoBehaviour
 
         if (PlaySound)
         {
-            Debug.Log("Throwing ball and playing sound");
 
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
         }

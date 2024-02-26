@@ -8,6 +8,7 @@ public class CrowController : MonoBehaviour
     public float moveSpeed = 5f;
     private bool isMoving = false;
     public GameObject winPanel;
+    public ParticleSystem hitParticles; // Reference to the ParticleSystem component
     public float liftHeight = 13f; // Adjust as necessary
     public float liftDuration = 1f; // Duration for lifting up animation
     public float rotationSpeed = 2f; // Adjust as necessary
@@ -15,8 +16,8 @@ public class CrowController : MonoBehaviour
 
     void Start()
     {
-        MoveToNextPosition();
-    }
+        //MoveToNextPosition();
+        hitParticles = GetComponentInChildren<ParticleSystem>();    }
 
     void Update()
     {
@@ -79,39 +80,101 @@ public class CrowController : MonoBehaviour
         {
             isMoving = false;
             isDescending = false; // Reset for the next movement
-
-            // If it's the last position, make the crow fly away
-            if (currentPositionIndex == positions.Length - 1)
-            {
-                FlyAway();
-            }
-        }
-    }
-
-
-    void MoveToNextPosition()
-    {
-        if (currentPositionIndex < positions.Length - 1)
-        {
-            currentPositionIndex++;
-            StartCoroutine(FlyUpAndRotate()); // Use coroutine to lift and rotate before moving horizontally
         }
     }
 
     private void OnTriggerEnter(Collider other)
-{
-    Debug.Log($"OnTriggerEnter called. isMoving: {isMoving}, isDescending: {isDescending}, Tag: {other.tag}");
-
-    if (other.CompareTag("dodgeBallActive") && !isMoving && !isDescending)
     {
-        Debug.Log("Moving to next position.");
-        MoveToNextPosition();
+        if (other.CompareTag("dodgeBallActive") && !isMoving && !isDescending)
+        {
+            PlayHitParticles(); // Play hit particles
+            CheckNextPositionOrFlyAway();
+        }
     }
-}
+
+    void PlayHitParticles()
+    {
+        if (hitParticles != null)
+        {
+            Debug.Log("Playing hit particles"); // Add this line for debugging
+            hitParticles.Play(); // Play the particle system
+        }
+        else
+        {
+            Debug.LogError("Hit particles component not found!"); // This will help identify if the component is missing
+        }
+    }
+
+
+    void CheckNextPositionOrFlyAway()
+    {
+        // Check if there are any positions left to land on
+        if (currentPositionIndex < positions.Length - 1)
+        {
+            // If there are, move to the next position
+            Debug.Log("Moving to next position.");
+            MoveToNextPosition();
+        }
+        else
+        {
+            // If there are no positions left, fly away immediately
+            Debug.Log("No more positions left. Flying away.");
+            FlyAway();
+        }
+    }
+
+    void MoveToNextPosition()
+    {
+        currentPositionIndex++;
+        StartCoroutine(FlyUpAndRotate()); // Use coroutine to lift and rotate before moving horizontally
+    }
+
+    IEnumerator FlyAwaySequence()
+    {
+        // First, fly upwards to the lift height
+        Vector3 startUpPosition = transform.position;
+        Vector3 endUpPosition = new Vector3(transform.position.x, liftHeight, transform.position.z);
+        float elapsedTimeUp = 0;
+
+        while (elapsedTimeUp < liftDuration)
+        {
+            transform.position = Vector3.Lerp(startUpPosition, endUpPosition, elapsedTimeUp / liftDuration);
+            elapsedTimeUp += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endUpPosition; // Ensure the crow reaches the exact lift height
+
+        // Wait for a brief moment at the top
+        yield return new WaitForSeconds(1f); // Adjust the delay as needed
+
+        // Then, move far away in the x-direction
+        Vector3 startAwayPosition = transform.position;
+        Vector3 endAwayPosition = new Vector3(transform.position.x + 100, transform.position.y, transform.position.z); // Change 100 to your desired distance
+        float elapsedTimeAway = 0;
+        float moveAwayDuration = 2f; // Adjust the duration for moving away as needed
+
+        while (elapsedTimeAway < moveAwayDuration)
+        {
+            transform.position = Vector3.Lerp(startAwayPosition, endAwayPosition, elapsedTimeAway / moveAwayDuration);
+            elapsedTimeAway += Time.deltaTime;
+            yield return null;
+        }
+
+        // Optionally, show the win panel after the crow has moved away
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+        }
+
+        // Finally, destroy or deactivate the crow as needed
+        // Destroy(gameObject);
+    }
 
     void FlyAway()
     {
-        winPanel.SetActive(true);
-        Destroy(gameObject); // Or move it far away
+        // Start the sequence
+        StartCoroutine(FlyAwaySequence());
     }
+
 }
