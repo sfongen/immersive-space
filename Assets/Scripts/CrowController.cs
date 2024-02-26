@@ -163,9 +163,10 @@ public class CrowController : MonoBehaviour
 
         // Optionally, show the win panel after the crow has moved away
         if (winPanel != null)
-        {
-            winPanel.SetActive(true);
-        }
+            {
+                Debug.Log("Activating win panel.");
+                winPanel.SetActive(true);
+            }
 
         // Finally, destroy or deactivate the crow as needed
         // Destroy(gameObject);
