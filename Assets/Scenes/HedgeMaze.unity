@@ -952,6 +952,7 @@ GameObject:
   - component: {fileID: 80470987}
   - component: {fileID: 80470986}
   - component: {fileID: 80470985}
+  - component: {fileID: 80470988}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -1023,13 +1024,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: fadb4a00e65b17943a906b24bbd88104, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 80470988}
+        m_TargetAssemblyTypeName: LoadPlaygroundScene, Assembly-CSharp
+        m_MethodName: LoadPlayground
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1073,6 +1074,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80470983}
   m_CullTransparentMesh: 1
+--- !u!114 &80470988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80470983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadb4a00e65b17943a906b24bbd88104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &80537890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3498,6 +3511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 323517480}
   - component: {fileID: 323517479}
+  - component: {fileID: 323517481}
   m_Layer: 0
   m_Name: MENU_CONTROLLER
   m_TagString: Untagged
@@ -3532,6 +3546,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &323517481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323517478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadb4a00e65b17943a906b24bbd88104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &327417534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7128,7 +7154,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 708833288}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4993607472596837027, guid: 639712af37681944b81bb1211b2fec9a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1301085838}
   m_SourcePrefab: {fileID: 100100000, guid: 639712af37681944b81bb1211b2fec9a, type: 3}
 --- !u!1001 &676141795
 PrefabInstance:
@@ -13699,6 +13729,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1204692014}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1205083474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4993607472596837027, guid: 639712af37681944b81bb1211b2fec9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 675608494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1206557587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14679,6 +14715,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 675608494}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1301085838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205083474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadb4a00e65b17943a906b24bbd88104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1304393943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 447101217039638539, guid: f5747bef8ca92954c91224226883fe7c,

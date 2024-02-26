@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HedgeMaze.unity
     guid: d67e9f2d6efd3084f9b52bd955de8c82
+  - enabled: 1
+    path: Assets/Scenes/Playground.unity
+    guid: 6e3d90f93493bec479fda439fee81e1e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4d91049841035460f9654c1b5e05c046,
       type: 2}
