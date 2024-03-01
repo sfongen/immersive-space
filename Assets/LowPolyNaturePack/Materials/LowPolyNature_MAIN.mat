@@ -261,7 +261,7 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.19
+    - _Glossiness: 0.087
     - _GlossyReflections: 1
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
@@ -280,7 +280,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 0.5
+    - _Metallic: 0.28
     - _MetallicRemapMax: 0
     - _MetallicRemapMin: 0
     - _Mode: 0
